@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            ngModel
+            email
+            required
+            #email="ngModel"
+          />
+          <span class="help-block" *ngIf="!email.valid && email.touched"
+            >Please enter an e-mail</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="subscriptionType">Subscription</label>
+          <select
+            [ngModel]="subscriptionType"
+            id="subscriptionType"
+            name="subscriptionType"
+            class="form-control"
+          >
+            <option
+              *ngFor="let subscriptionType of subscriptionTypes"
+              [value]="subscriptionType"
+              >{{ subscriptionType }}</option
+            >
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            ngModel
+            required
+            #password="ngModel"
+          />
+          <span class="help-block" *ngIf="!password.valid && password.touched"
+            >Please enter a password</span
+          >
+          <span class="help-block" *ngIf="!f.valid && f.touched"
+            >Please correct the above errors</span
+          >
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">
+          Send
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="row" *ngIf="submitted">
+    <hr />
+    <div class="col-xs-12">
+      <h3>Your data</h3>
+      <p>Email: {{ this.signupForm.value.email }}</p>
+      <p>Subscription type: {{ this.signupForm.value.subscriptionType }}</p>
+      <p>Password: {{ this.signupForm.value.password }}</p>
+    </div>
+  </div>
+</div>
